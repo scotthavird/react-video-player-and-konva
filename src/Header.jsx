@@ -16,20 +16,19 @@ export const Header = (props) => {
     console.log("file", file);
 
     // get video width and height
-    const [width, height] = await loadVideoMetadata(file);    
-    console.log("width", width);
-    console.log("height", height);
-
-    // get local url
-    const url = URL.createObjectURL(file);
+    const [url, width, height] = await loadVideoMetadata(file);    
+    console.log(`width: ${width}, height: ${height}, url: ${url}`);
+    //console.log("width", width);
+    //console.log("height", height);
 
     inputChanged(file, url, width, height);
   };
 
   function loadVideoMetadata(blob) {
     return new Promise((resolve, reject) => {
+      let url
       try {
-        const url = URL.createObjectURL(blob);
+        url = URL.createObjectURL(blob);
         videoRef.current.src = url;
       } catch (err) {
         console.log("err", err);
@@ -40,7 +39,7 @@ export const Header = (props) => {
         const width = video.srcElement.videoWidth;
         const height = video.srcElement.videoHeight;
 
-        resolve([width, height]);
+        resolve([url, width, height]);
       };
 
       videoRef.current.onerror = (err) => {

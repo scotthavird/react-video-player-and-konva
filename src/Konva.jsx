@@ -1,14 +1,40 @@
 import React from "react";
 import { Stage, Layer, Rect, Circle, Line } from "react-konva";
+import { makeStyles } from '@material-ui/core/styles';
+/*
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25% // Player ratio: 100 / (1280 / 720) 
+}
+
+.stage-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+
+*/
+
+const useStyles = makeStyles(() => ({
+  stageOverlay: {
+    position: "absolute",
+    zIndex: 2
+    //top: 0,
+    //left: 0
+  },
+}));
 
 export const Konva = (props) => {
   const { width, height } = props;
+  const classes = useStyles();
 
   const floatWidth = parseFloat(width);
   const floatHeight = parseFloat(height);
 
   return (
-    <Stage width={floatWidth} height={floatHeight}>
+    <Stage width={floatWidth} height={floatHeight} className={classes.stageOverlay}>
       <Layer>
         <Rect
           x={20}
