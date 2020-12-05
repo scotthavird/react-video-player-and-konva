@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import { Header } from "./Header.jsx";
 import { Konva } from "./Konva.jsx";
 import { Player } from "./Player.jsx";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  wrangler: {
+    //position: "absolute",
+  }
+}));
 
 export const App = () => {
-  //const classes = useStyles();
+  const classes = useStyles();
+  
   const [player, setPlayer] = useState({
     width: "200",
     height: "200"
   });
 
-  //let width = "200";
-  //let height = "200";
-  // window.innerHeight
+  const divRef = useRef()
 
-  const inputChanged = (video, url, width, height) => {
-    console.log("inputChanged: video", video);
-    console.log(`inputChanged: width: ${width}, height: ${height}`);
-    //console.log("inputChanged.width", width);
-    //console.log("inputChanged.height", height);
+  const inputChanged = (url, width, height) => {    
+    console.log(`inputChanged url: ${url}, width: ${width}, height: ${height}`); 
 
     setPlayer({
       src: url,
@@ -30,9 +33,11 @@ export const App = () => {
 
   return (
     <>
-      <Header inputChanged={inputChanged} />
-      <Konva width={player.width} height={player.height} />
-      <Player src={player.src} width={player.width} height={player.height} />
+      <Header inputChanged={inputChanged} />      
+      <div ref={divRef} width={"100%"} height={"100%"} className={classes.wrangler}>
+        <Konva width={player.width} height={player.height} />      
+        <Player src={player.src} width={player.width} height={player.height} />
+      </div>      
     </>
   );
 };

@@ -13,15 +13,13 @@ export const Header = (props) => {
 
     // get video blob
     const file = e.currentTarget.files[0];    
-    console.log("file", file);
+    //console.log("file", file);
 
     // get video width and height
     const [url, width, height] = await loadVideoMetadata(file);    
     console.log(`width: ${width}, height: ${height}, url: ${url}`);
-    //console.log("width", width);
-    //console.log("height", height);
 
-    inputChanged(file, url, width, height);
+    inputChanged(url, width, height);
   };
 
   function loadVideoMetadata(blob) {
