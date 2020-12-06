@@ -15,8 +15,8 @@ const useStyles = makeStyles(() => ({
 
 export const App = () => {
   const classes = useStyles();
-  const videoPlayerDivRef = useRef();
-  const [konvaSize, setKonvaSize] = useState({
+  
+  const [konva, setKonva] = useState({
     width: 200,
     height: 200
   })
@@ -41,7 +41,7 @@ export const App = () => {
   const playerResized = (width, height) => {
     console.log(`playerResized: width ${width}, height ${height}`)
 
-    setKonvaSize({      
+    setKonva({      
       width: width,
       height: height
     });
@@ -52,7 +52,7 @@ export const App = () => {
       <Header inputChanged={inputChanged} />      
 
       <div className={classes.playerWrapper} width={player.width} height={player.height} >        
-        <Konva width={konvaSize.width} height={konvaSize.height} />        
+        <Konva width={konva.width} height={konva.height} />        
         <Player src={player.src} playerResized={playerResized}/>
       </div>
     </>

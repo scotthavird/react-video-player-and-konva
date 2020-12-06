@@ -1,6 +1,7 @@
 import React, {useRef, useState, useLayoutEffect, useEffect} from "react";
 import ReactPlayer from "react-player";
 import { makeStyles } from '@material-ui/core/styles';
+import useResizeAware from 'react-resize-aware';
 
 const useStyles = makeStyles(() => ({
   reactPlayer: {
@@ -16,6 +17,7 @@ export const Player = (props) => {
 
   const divRef = useRef();
   const [player, setPlayer] = useState()
+  const [resizeListener, sizes] = useResizeAware();
 
   const ref = (player) => {
     setPlayer(player)
@@ -34,18 +36,31 @@ export const Player = (props) => {
   }, [])
 
   const handleOnReady = () => {
-    console.log('handleOnReady')
-    console.log('handleOnReady.player',player)
-    console.log('handleOnReady.divRef',divRef)
+    
     const height = player.wrapper.clientHeight
     const width = player.wrapper.clientWidth
     console.log('height',height)
     console.log('width',width)
+
     playerResized(width, height)
   }
 
+  useEffect(() => {
+    console.log('Do something with the new size values');
+    if (player !== undefined) {
+      const height = player.wrapper.clientHeight
+      const width = player.wrapper.clientWidth
+      console.log('height',height)
+      console.log('width',width)
+
+      playerResized(width, height)
+    }
+    
+  }, [sizes.width, sizes.height]);
+
   return (        
     <div ref={divRef}>
+      {resizeListener}
       <ReactPlayer
         className={classes.reactPlayer}
         ref={ref}
