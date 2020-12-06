@@ -31,7 +31,8 @@ export const Konva = (props) => {
   const classes = useStyles();
 
   const floatWidth = parseFloat(width);
-  const floatHeight = parseFloat(height);
+  // TODO: remove hack
+  const floatHeight = parseFloat(height - 4);
 
   return (
     <Stage width={floatWidth} height={floatHeight} className={classes.stageOverlay}>
