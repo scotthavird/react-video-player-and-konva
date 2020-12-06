@@ -46,12 +46,12 @@ export const Player = (props) => {
   }
 
   useEffect(() => {
-    console.log('Do something with the new size values');
+    //console.log('Do something with the new size values');
     if (player !== undefined) {
       const height = player.wrapper.clientHeight
       const width = player.wrapper.clientWidth
-      console.log('height',height)
-      console.log('width',width)
+      //console.log('height',height)
+      //console.log('width',width)
 
       playerResized(width, height)
     }

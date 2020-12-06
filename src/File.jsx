@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
 
-export const Header = (props) => {  
+export const File = (props) => {  
   const { inputChanged } = props;
   const videoRef = useRef();
 
@@ -13,13 +13,13 @@ export const Header = (props) => {
 
     // get video blob
     const file = e.currentTarget.files[0];    
-    //console.log("file", file);
 
     // get video width and height
     const [url, width, height] = await loadVideoMetadata(file);    
     console.log(`width: ${width}, height: ${height}, url: ${url}`);
 
-    inputChanged(url, width, height);
+    //inputChanged(url, width, height);
+    inputChanged(url);
   };
 
   function loadVideoMetadata(blob) {
