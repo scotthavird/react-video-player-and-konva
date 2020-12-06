@@ -20,9 +20,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
   stageOverlay: {
     position: "absolute",
-    zIndex: 2
-    //top: 0,
-    //left: 0
+    zIndex: 2,
+    top: 0,
+    left: 0
   },
 }));
 
