@@ -14,11 +14,9 @@ export const File = (props) => {
     // get video blob
     const file = e.currentTarget.files[0];    
 
-    // get video width and height
-    const [url, width, height] = await loadVideoMetadata(file);    
-    console.log(`width: ${width}, height: ${height}, url: ${url}`);
+    // get video local url
+    const url = await loadVideoMetadata(file);        
 
-    //inputChanged(url, width, height);
     inputChanged(url);
   };
 
@@ -32,12 +30,8 @@ export const File = (props) => {
         console.log("err", err);
       }
 
-      videoRef.current.onloadedmetadata = function (video) {
-        console.log("video", video);
-        const width = video.srcElement.videoWidth;
-        const height = video.srcElement.videoHeight;
-
-        resolve([url, width, height]);
+      videoRef.current.onloadedmetadata = function (video) {        
+        resolve(url);
       };
 
       videoRef.current.onerror = (err) => {

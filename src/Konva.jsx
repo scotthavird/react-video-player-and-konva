@@ -1,13 +1,12 @@
 import React from "react";
-import { Stage, Layer, Rect, Circle, Line } from "react-konva";
+
+import { Stage, Layer, Rect } from "react-konva";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   stageOverlay: {
     position: "absolute",
-    zIndex: 2,
-    //top: 0,
-    //left: 0
+    zIndex: 2
   },
 }));
 
@@ -41,9 +40,7 @@ export const Konva = (props) => {
           y={final.y}
           width={final.w}
           height={final.h}
-          //fill="red"
           stroke="red"
-          //shadowBlur={10}
         />        
       </Layer>
     </Stage>

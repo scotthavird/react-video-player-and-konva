@@ -1,21 +1,10 @@
-import React, {useRef, useState, useLayoutEffect, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import ReactPlayer from "react-player";
-import { makeStyles } from '@material-ui/core/styles';
 import useResizeAware from 'react-resize-aware';
 
-const useStyles = makeStyles(() => ({
-  reactPlayer: {
-    position: "absolute",    
-    top: 0,
-    left: 0
-  }
-}));
-
 export const Player = (props) => {
-  const { src, playerResized } = props;  
-  const classes = useStyles();
+  const { src, playerResized } = props;    
 
-  const divRef = useRef();
   const [player, setPlayer] = useState()
   const [resizeListener, sizes] = useResizeAware();
 
@@ -23,46 +12,30 @@ export const Player = (props) => {
     setPlayer(player)
   }
 
-  useEffect(() => {
-    console.log('useEffect')
-    console.log('useEffect.player',player)
-    console.log('useEffect.divRef',divRef)
-  }, [])
-
-  useLayoutEffect(() => {
-    console.log('useLayoutEffect')
-    console.log('useLayoutEffect.player',player)
-    console.log('useLayoutEffect.divRef',divRef)
-  }, [])
-
-  const handleOnReady = () => {
-    
-    const height = player.wrapper.clientHeight
-    const width = player.wrapper.clientWidth
-    console.log('height',height)
-    console.log('width',width)
-
-    playerResized(width, height)
-  }
-
-  useEffect(() => {
-    //console.log('Do something with the new size values');
+  const playerSizeChanged = () => {
     if (player !== undefined) {
       const height = player.wrapper.clientHeight
       const width = player.wrapper.clientWidth
-      //console.log('height',height)
-      //console.log('width',width)
 
       playerResized(width, height)
     }
-    
+  }
+
+  // video player is ready, lets get the wrapper size
+  const handleOnReady = () => {
+    playerSizeChanged()
+  }
+
+  // if the user resizes a window and effects the size of our react player div
+  useEffect(() => {
+    playerSizeChanged()    
   }, [sizes.width, sizes.height]);
 
   return (        
-    <div ref={divRef}>
+    <div>
       {resizeListener}
       <ReactPlayer
-        className={classes.reactPlayer}
+        style={{ position: "absolute"}}
         ref={ref}
         url={src}          
         width="1" 
