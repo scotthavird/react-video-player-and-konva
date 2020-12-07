@@ -1,7 +1,6 @@
 import React from "react";
-
-import { Stage, Layer, Rect } from "react-konva";
 import { makeStyles } from '@material-ui/core/styles';
+import { Stage, Layer, Rect } from "react-konva";
 
 const useStyles = makeStyles(() => ({
   stageOverlay: {
@@ -22,7 +21,7 @@ export const Konva = (props) => {
   }
 
   const floatWidth = parseFloat(width);
-  // TODO: remove hack
+  // TODO: figure out why and remove hack (-4)
   const floatHeight = parseFloat(height - 4);
 
   const final = {
