@@ -40,6 +40,7 @@ export const Konva = (props) => {
           width={final.w}
           height={final.h}
           stroke="red"
+          strokeWidth={10}
         />        
       </Layer>
     </Stage>

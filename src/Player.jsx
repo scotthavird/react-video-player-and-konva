@@ -40,7 +40,8 @@ export const Player = (props) => {
         url={src}          
         width="1" 
         height="1" 
-        onReady={handleOnReady}         
+        onReady={handleOnReady}
+        playing={true}    
       />
     </div>      
   );
