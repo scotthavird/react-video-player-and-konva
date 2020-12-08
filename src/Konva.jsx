@@ -13,6 +13,7 @@ export const Konva = (props) => {
   const { width, height } = props;
   const classes = useStyles();
 
+  // simple example
   const box = {
     x: 0.25,
     y: 0.25,
